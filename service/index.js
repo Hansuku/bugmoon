@@ -10,9 +10,11 @@ app.use(bodyParser())
 app.use(cors())
 
 let user = require('./API/user.js')
+let collection = require('./API/collection.js')
 
 let router = new Router()
 router.use('/user',user.routes())
+router.use('/bug',collection.routes())
 
 //加载路由中间件
 app.use(router.routes())

@@ -67,6 +67,16 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
+        path: '/bug',
+        icon: 'bug',
+        name: 'bug',
+        title: '错误日志',
+        component: Main,
+        children: [
+            { path: 'index', title: '错误日志', name: 'bug_index', component: () => import('@/views/bug-report/index.vue') }
+        ]
+    },
+    {
         path: '/access',
         icon: 'key',
         name: 'access',
