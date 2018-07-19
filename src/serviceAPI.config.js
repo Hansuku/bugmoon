@@ -1,8 +1,8 @@
 const LOCALURL = "http://localhost:3000/"
 const DETAILS = "https://bug.boomgeek.cn/"
 const URL = {
-    throwError:LOCALURL+'bug/getWarning',
-    warningInfo:LOCALURL+'bug/warningInfo',
+    throwError:DETAILS+'bug/getWarning',
+    warningInfo:DETAILS+'bug/warningInfo',
 }
 
 module.exports = URL
