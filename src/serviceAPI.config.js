@@ -1,12 +1,8 @@
-const BASEURL = "https://www.easy-mock.com/mock/5af8f1df52c5bd051e93f6cc/koa2/"
 const LOCALURL = "http://localhost:3000/"
+const DETAILS = "https://bug.boomgeek.cn/"
 const URL = {
     throwError:LOCALURL+'bug/getWarning',
-    getShopingMallInfo : BASEURL+'indexGoods',
-    getGoodsInfo : BASEURL+'getGoodsInfo',
-    regeisterUser : LOCALURL+'user/register',
-    login : LOCALURL+'user/login',
-    getDetailGoodInfo : LOCALURL+'good/getDetailGoodsInfo',
+    warningInfo:LOCALURL+'bug/warningInfo',
 }
 
 module.exports = URL

@@ -5,7 +5,7 @@ import {appRouter} from './router/router';
 import store from './store';
 import App from './app.vue';
 import axios from 'axios';
-import url from '@/serviceAPI.config.js'
+import apiUrl from '@/serviceAPI.config.js'
 import '@/locale';
 import 'iview/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
@@ -31,7 +31,7 @@ new Vue({
         // 权限菜单过滤相关
         this.$store.commit('updateMenulist');
         // iview-admin检查更新
-        util.checkUpdate(this);
+        // util.checkUpdate(this);
     },
     created () {
         let tagsList = [];
@@ -47,9 +47,43 @@ new Vue({
 });
 
 Vue.config.errorHandler = function(err,vm,info){
-    let data = {'errMsg':err.message,'url':vm.$el.baseURI,'event':info,'userAgent':window.navigator.userAgent}
+    let data = {
+        'errMsg':err.message,
+        'url':vm.$el.baseURI,
+        'event':info,
+        'userAgent':window.navigator.userAgent,
+        'line':0,
+        'col':0,
+        'error':'',
+        'type':'vue'
+    }
     axios({
-      url: url.throwError,
+      url: apiUrl.throwError,
+      method:'post',
+      data:data,
+    }).then(response=>{
+      if(response.status == 200){
+    }
+    }).catch(error=>{
+      console.log(error);
+    })
+}
+
+window.onerror = function(msg, url, line, col, error) {
+    console.log(arguments)
+    window.demoError = arguments
+    let data = {
+        'errMsg':error.message,
+        'url':url,
+        'event':'',
+        'userAgent':window.navigator.userAgent,
+        'line':line,
+        'col':col,
+        'error':error.stack,
+        "type":'window'
+    }
+    axios({
+      url: apiUrl.throwError,
       method:'post',
       data:data,
     }).then(response=>{

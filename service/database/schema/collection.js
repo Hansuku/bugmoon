@@ -10,6 +10,11 @@ const bugSchema = new Schema({
     url : String,
     userAgent : String,
     createAt:{type:Date, default:Date.now()},
+    line:Number,
+    col:Number,
+    error:String,
+    type:String,
+    ip:String,
 },{
   collection:'bug_report'  
 })
