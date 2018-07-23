@@ -30,7 +30,7 @@ router.post('/getWarning',async (ctx)=>{
 
 router.get('/WarningInfo',async(ctx)=>{
     const bugs = mongoose.model('collection')
-    await bugs.find().exec().then(async(result)=>{
+    await bugs.find().sort({'createAt': -1}).then(async(result)=>{
         if(result){
             ctx.body={code:200,message:result}
         }else{

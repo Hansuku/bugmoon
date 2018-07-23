@@ -25,11 +25,11 @@ export default {
                 },
                 {
                     title: '时间',
-                    key: 'created'
+                    key: 'createAt'
                 },
                 {
                     title: '错误信息',
-                    key: 'title'
+                    key: 'errMsg'
                 },
                 {
                     title: '来自',
@@ -47,14 +47,15 @@ export default {
         }).then(response=>{
             if(response.data.code == 200){
                 let option = []
-                for(let value of response.data.message){
-                    option.push({
-                        "created":value.createAt,
-                        "title":value.errMsg,
-                        "url":value.url,
-                    })
-                }
-                self.tableInfo = option
+                // for(let value of response.data.message){
+                //     option.push({
+                //         "created":value.createAt,
+                //         "title":value.errMsg,
+                //         "url":value.url,
+                //         "errMsg":
+                //     })
+                // }
+                self.tableInfo = response.data.message
             }
         }).catch(error=>{
             console.log(error);

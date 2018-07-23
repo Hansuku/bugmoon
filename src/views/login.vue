@@ -4,6 +4,11 @@
 
 <template>
     <div class="login" @keydown.enter="handleSubmit">
+        <div id="scene">
+            <div class="login-img" data-depth="0.2">
+                <img src="https://cdn.hansuku.com/iviewBG.jpg" alt="">
+            </div>
+        </div>
         <div class="login-con">
             <Card :bordered="false">
                 <p slot="title">
@@ -14,16 +19,16 @@
                     <Form ref="loginForm" :model="form" :rules="rules">
                         <FormItem prop="userName">
                             <Input v-model="form.userName" placeholder="请输入用户名">
-                                <span slot="prepend">
-                                    <Icon :size="16" type="person"></Icon>
-                                </span>
+                            <span slot="prepend">
+                                <Icon :size="16" type="person"></Icon>
+                            </span>
                             </Input>
                         </FormItem>
                         <FormItem prop="password">
                             <Input type="password" v-model="form.password" placeholder="请输入密码">
-                                <span slot="prepend">
-                                    <Icon :size="14" type="locked"></Icon>
-                                </span>
+                            <span slot="prepend">
+                                <Icon :size="14" type="locked"></Icon>
+                            </span>
                             </Input>
                         </FormItem>
                         <FormItem>
@@ -34,12 +39,14 @@
             </Card>
         </div>
     </div>
+
 </template>
 
 <script>
 import Cookies from 'js-cookie'
 import url from '@/serviceAPI.config.js'
 import axios from 'axios'
+import Parallax from 'parallax-js'
 export default {
     data () {
         return {
@@ -57,6 +64,12 @@ export default {
             },
             submitLoading:false,
         };
+    },
+    mounted(){
+        let scene = document.getElementById('scene')
+        var parallaxInstance = new Parallax(scene,{
+            relativeInput: true
+        })
     },
     methods: {
         handleSubmit () {
@@ -91,12 +104,13 @@ export default {
                 if(result.data.code==200 && result.data.message){
                     new Promise((resolve,reject)=>{
                         Cookies.set('user', self.form.userName);
-                        Cookies.set('password', self.form.password);
+                        // Cookies.set('password', self.form.password);
                         if (self.form.userName === 'admin') {
                             Cookies.set('access', 0);
                         } else {
                             Cookies.set('access', 1);
                         }
+                        this.$store.commit('setAvator', 'https://cdn.hansuku.com/iviewAdmin.jpg');
                         setTimeout(()=>{resolve()},500)
                     }).then(()=>{
                         self.$Message.success('登录成功');
