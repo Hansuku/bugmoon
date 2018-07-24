@@ -1,6 +1,10 @@
 <template>
     <div>
-        <Button type="primary" @click="man">测试</Button>
+        <Layout>
+            <Header>
+                <Input v-model="value" placeholder="Enter something..." style="width: 300px"></Input>
+            </Header>
+        </Layout>
         <Table :columns="columns" :data="tableInfo"></Table>
     </div>
 </template>
@@ -36,7 +40,8 @@ export default {
                     key: 'url'
                 }
             ],
-            tableInfo: []
+            tableInfo: [],
+            value:'',
         }
     },
     mounted(){
